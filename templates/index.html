@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body onload="window.location.href='{{url_for('demo')}}';">
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="col-lg-6">
+        <div class="nav navbar-nav navbar-left">
+          <h3 style="color: white;">Digital Display Board</h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+      <div class="nav navbar-nav navbar-right">
+        <h5><a href="#footer" class="contact">Contact Us</a></h5>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
+    <h1 class="container">{{message}}</h1>
+  </header>
+
+<!--
+  <section id="hero" class="d-flex flex-column justify-content-end align-items-center">
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">{{message}}</h2>
+          </div>
+      </div>
+    </div>
+  </section>
+-->
+
+  <div class="container" id="content">
+        {% block content %}
+        {% if rows %}
+      
+          <table id="customers">
+            {% for row in rows[:1] %}
+            <tr>
+            {% for col in row %}
+                
+                    <th>{{ col }}</th>  
+                    {% endfor %}      
+                </tr>
+              {% endfor %}
+      
+            {% for row in rows[1:] %}
+            <tr>
+            {% for col in row %}
+                
+                    <td>{{ col }}</td>  
+                    {% endfor %}      
+                </tr>
+              {% endfor %}   
+          </table>
+      
+        {% endif %}
+
+
+        {% if images %}
+        {% for img in images %}
+        <img id="image" src="{{img}}" height="500" width="100%"> <br>
+        {% endfor %}
+        {% endif %}
+      
+        {% if docs %}
+        {% for doc in docs %}
+        <embed id="doc" src="{{doc}}" height="500" width="100%">
+          {% endfor %}
+          {% endif %}
+
+          {% if videos %}
+          {% for video in videos %}
+            <video id="video" width="100%" height="500" controls autoplay loop>
+
+            <source src={{ video }} type="video/mp4">
+            </video>
+            {% endfor %}
+            {% endif %}
+
+        {% endblock content %}
+</div>
+<footer id="footer">
+  <div class="container">
+    <div class="social-links">
+      <a href="#" class="fa fa-twitter"></a>
+      <a href="#" class="fa fa-youtube"></a>
+      <a href="#" class="fa fa-phone"></a>
+      <a href="#" class="fa fa-envelope-o"></a>
+      <a href="#" class="fa fa-map-marker"></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+ 
+    $("a.contact").click(function(event) {
+      event.preventDefault();
+      $("html, body").animate({
+          scrollTop: $($(this).attr("href")).offset().top
+        }, 500);
+    });
+
+    $("div#content").onload(function(event) {
+      event.preventDefault();
+      $("html, body").animate({
+          scrollTop: $('div#content').offset().top
+        }, 500);
+    });
+
+});
+	
+
+$(document).ready(function () {
+    var tt = '{{ anchor }}';
+    $('html, body').animate({
+        scrollTop: $('#' + tt).offset().top - 80
+    }, 'slow');
+});
+
+
+</script>
+
+
+</body>
+</html>
+
